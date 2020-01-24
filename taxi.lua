@@ -31,7 +31,12 @@ function callTaxi()
     -- spawn the taxi
     local taxi = CreateVehicle(taxiModel, Config.taxiSpawn.x, Config.taxiSpawn.y, Config.taxiSpawn.z, 260.0, true, true)
     -- put the ped in the taxi
-    CreatePedInsideVehicle(taxi, 4, driverModel, -1, true, true)
+    local driver = CreatePedInsideVehicle(taxi, 4, driverModel, -1, true, true)
+    driveToPickup(taxi, driver)
+end
+
+function driveToPickup(vehicle, driver)
+    TaskVehicleDriveToCoord(driver, vehicle, Config.taxiPickup.x, Config.taxiPickup.y, Config.taxiPickup.z, 40.0, 447, 1.0)
 end
 
 function createModel(model)
