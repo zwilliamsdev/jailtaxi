@@ -33,10 +33,13 @@ function callTaxi()
     -- put the ped in the taxi
     local driver = CreatePedInsideVehicle(taxi, 4, driverModel, -1, true, true)
     driveToPickup(taxi, driver)
+    notify("~g~A taxi driver has been alerted please be patient!")
 end
 
 function driveToPickup(vehicle, driver)
-    TaskVehicleDriveToCoord(driver, vehicle, Config.taxiPickup.x, Config.taxiPickup.y, Config.taxiPickup.z, 40.0, 447, 1.0)
+    SetDriverAbility(driver, 1.0)
+    SetDriverAggressiveness(driver, 0.0)
+    TaskVehicleDriveToCoordLongrange(driver, vehicle, Config.taxiPickup.x, Config.taxiPickup.y, Config.taxiPickup.z, 20.0, 447, 10.0)
 end
 
 function createModel(model)
@@ -48,6 +51,11 @@ function createModel(model)
     SetModelAsNoLongerNeeded(model)
 end
 
+function notify(msg)
+    SetNotificationTextEntry("STRING")
+    AddTextComponentString(msg)
+    DrawNotification(true, false)
+end
 
 function alert(msg)
     SetTextComponentFormat("STRING")
