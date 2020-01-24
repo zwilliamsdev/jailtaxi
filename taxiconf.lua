@@ -1,7 +1,7 @@
 Config = {}
 
 Config.taxiModel = "taxi"
-Config.driverModel = "a_m_y_beach_01" --"a_m_o_beach_01"
+Config.driverModel = "a_m_o_beach_01"
 
 Config.baseFare = 75 -- Base price of taxi ride
 Config.pricePerMile = 15 -- Price per mile of driving
