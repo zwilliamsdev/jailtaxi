@@ -19,8 +19,28 @@ Citizen.CreateThread(function()
     end
 end)
 
+RegisterCommand("taxidebug", function()
+    callTaxi()
+end, false)
+
 function callTaxi()
-    print('Taxi called')
+    local taxiModel = GetHashKey(Config.taxiModel) -- Get hash for taxi
+    local driverModel = GetHashKey(Config.driverModel) -- Get hash for driver
+    createModel(taxiModel) -- load the taxi model
+    createModel(driverModel) -- load the driver model
+    -- spawn the taxi
+    local taxi = CreateVehicle(taxiModel, Config.taxiSpawn.x, Config.taxiSpawn.y, Config.taxiSpawn.z, 260.0, true, true)
+    -- put the ped in the taxi
+    CreatePedInsideVehicle(taxi, 4, driverModel, -1, true, true)
+end
+
+function createModel(model)
+    RequestModel(model)
+    while not HasModelLoaded(model) do
+        RequestModel(model)
+        Citizen.Wait(0)
+    end
+    SetModelAsNoLongerNeeded(model)
 end
 
 
