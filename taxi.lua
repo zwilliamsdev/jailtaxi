@@ -75,7 +75,15 @@ function putPlayerInTaxi(vehicle)
             local plyPos = GetEntityCoords(ply)
             
             if Vdist2(plyPos.x, plyPos.y, plyPos.z, taxiPos.x, taxiPos.y, taxiPos.z) <= 4 then
-                log('Close enough')
+                alert('~y~Press ~INPUT_PICKUP~ to get in the taxi.')
+                if IsControlJustReleased(0, 38) then
+                    log('Attempting to place player in the taxi')
+                    if AreAnyVehicleSeatsFree(vehicle) then
+                        log('Seats available')
+                    else
+                        log('Seats not available')
+                    end
+                end
             end
         end
     end)
