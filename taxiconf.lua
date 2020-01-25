@@ -1,5 +1,7 @@
 Config = {}
 
+Config.requestTime = ""
+
 Config.taxiModel = "taxi"
 Config.driverModel = "a_m_o_beach_01"
 
